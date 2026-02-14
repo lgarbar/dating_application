@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Part 1: Valentine's Question Section -->
+    <div id="part1" class="section">
+        <div class="valentine-container">
+            <h1 class="fade-in">Will you be my Valentine? 💕</h1>
+            <div class="button-container">
+                <button id="yesBtn" class="btn btn-yes">Yes</button>
+                <button id="noBtn" class="btn btn-no">No</button>
+            </div>
+            <div id="attempts-display" class="attempts-display"></div>
+            <div id="escalation-image" class="escalation-image"></div>
+            <div id="escalation-audio" class="escalation-audio"></div>
+            <div id="escalation-text" class="escalation-text"></div>
+        </div>
+    </div>
+
+    <!-- Escalation Question 2: "So you hate me?" -->
+    <div id="escalation-q2" class="section hidden">
+        <div class="valentine-container">
+            <h1 class="fade-in">So you hate me? 😢</h1>
+            <div class="button-container">
+                <button id="q2YesBtn" class="btn btn-yes">No, I don't</button>
+                <button id="q2NoBtn" class="btn btn-no">Yes, I do</button>
+            </div>
+            <div id="q2-attempts-display" class="attempts-display"></div>
+            <div id="q2-escalation-image" class="escalation-image"></div>
+        </div>
+    </div>
+
+    <!-- Escalation Question 3: "Does your mom know you're gay?" -->
+    <div id="escalation-q3" class="section hidden">
+        <div class="valentine-container">
+            <h1 class="fade-in">Does your mom know you're gay? 🏳️‍🌈</h1>
+            <div class="button-container">
+                <button id="q3YesBtn" class="btn btn-yes">Yes</button>
+                <button id="q3NoBtn" class="btn btn-no">No</button>
+            </div>
+            <div id="q3-result" class="result-image"></div>
+        </div>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quiz-section" class="section hidden">
+        <div class="quiz-container">
+            <h1 class="quiz-title fade-in">If you want to be my Valentine, then answer my questions 1 to 9:</h1>
+            
+            <!-- Question Display -->
+            <div id="question-display" class="question-display">
+                <h2 id="question-text"></h2>
+                <div id="answers-container" class="answers-container"></div>
+            </div>
+
+            <!-- Response Display -->
+            <div id="response-display" class="response-display hidden">
+                <p id="response-text"></p>
+                <div id="response-media"></div>
+                <button id="next-question-btn" class="btn btn-next hidden">Next Question →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Section -->
+    <div id="final-section" class="section hidden">
+        <div class="valentine-container">
+            <h1 class="fade-in">You Made It! 🎉💌</h1>
+            <p class="final-message">I guess I'll be your Valentine</p>
+            <div id="final-image"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
