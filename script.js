@@ -12,6 +12,9 @@ const state = {
     q1Answered: false
 };
 
+const escalationAudioCache = {};
+let escalationAudioUnlocked = false;
+
 // Quiz Data
 const quizData = [
     {
@@ -22,35 +25,44 @@ const quizData = [
             { text: "C. Meowkora", correct: false },
             { text: "D. Kora Bora", correct: false }
         ],
-        response: "Wow, so you hate your daughter? 💔",
+        response: "Wow, so you hate your future daughter? 💔",
         hint: "Try hovering over here",
         correctAnswer: "Feline General Meowkora"
     },
     {
-        question: "2. What is my favorite beverage?",
+        question: "2. What is my ideal ideal date night activity?",
         answers: [
-            { text: "A. Diet Coke", correct: true, response: "Wow, the boringly correct answer smh 🤓" },
-            { text: "B. Milk", correct: false, response: "Only if it's Alison's Milk 😌" },
-            { text: "C. Skittles Water", correct: false },
-            { text: "D. Alison's Milk", correct: true, response: "Mmm mommy's milk 🥛🤤" }
+            { text: "A. Cooking a fancy meal from scratch together", correct: true, response: "And then bake a sweet treat together 🧁" },
+            { text: "B. Late-night drive with no destination and a good playlist", correct: true, response: "Correct, but you better add at least 1 PATD! song 🚗🎶" },
+            { text: "C. Going to a loud club to dance all night", correct: false, response: "Oh.. HELL NAH" },
+            { text: "D. Building a blanket fort and watching movies until we pass out", correct: true, response: "Elite tier. You get VIP access to the fort 🏰✨" }
         ]
     },
     {
-        question: "3. What's the best video game of all time?",
+        question: "3. What's my favorite thing to eat?",
         answers: [
-            { text: "A. Batman: Arkham City", correct: false, response: "THIS GIRL KNOWS BALL" },
-            { text: "B. Legend of Zelda", correct: false, response: "Nah. Cringe." },
-            { text: "C. Catan", correct: false, response: "Fine... I'll allow it..." },
-            { text: "D. Super Smash Bros Ultimate", correct: false, response: "HeLl NAh, tHAt GaME iS CrinGe" }
+            { text: "A. Sky's Vanilla Chai Cinnamon Snickerdoodles", correct: true, response: "They will be, I'm sure :))" },
+            { text: "B. Quesadillas", correct: true, response: "Ofc. It's just a better sandwich 😌" },
+            { text: "C. Sky's other cookie 👀", correct: true, response: "Maybe you'll see at some point just how true this is..." },
+            { text: "D. Kora", correct: false, response: "Nah... but I do threaten to eat her probably once a week." }
         ]
     },
     {
-        question: "4-5. Who's my greatest rival and what's their greatest power?",
+        question: "4. What's the best painting medium?",
         answers: [
-            { text: "A. Sweet treats and their power against my waistline", correct: false },
-            { text: "B. The outdoors and its power to be cringe", correct: false },
-            { text: "C. New Jersey Drivers and their power to be lunatics", correct: false },
-            { text: "D. Thea and her power to 6-7", correct: true, response: "Correct!" }
+            { text: "A. Oil Pastels", correct: false, response: "HELL NO."},
+            { text: "B. Acrylic", correct: false , response: "Nah... but not terrible"},
+            { text: "C. Watercolor", correct: true, response: "a reasonable answer..."},
+            { text: "D. Digital", correct: true, response: "The only correct answer."}
+        ]
+    },
+    {
+        question: "5. Who's the prettiest girl in the world?",
+        answers: [
+            { text: "A. Kora", correct: true, response: "Queen Kora 👑"},
+            { text: "B. Chai", correct: true , response: "Cool and serene, like a mornign tea"},
+            { text: "C. Poppie", correct: true, response: "Sweetheart like a PopTart"},
+            { text: "D. Sky", correct: true, response: "Your eyes glow bright, a sun within the Sky, A beauty I hope to wake to every day. Hold close to me as endless years go by, And let your gentle heart be mine to stay"}
         ]
     },
     {
@@ -60,21 +72,21 @@ const quizData = [
         response: "That's hilarious 😂"
     },
     {
-        question: "8. I am...?",
+        question: "8. Pick the best venue for our wedding to be:",
         answers: [
-            { text: "A. Costa Rican", response: "The bare minimum 🥰" },
-            { text: "B. Dominican", response: "So I'm reporting you to the IRS for Insider Trading and Tax Evasion" },
-            { text: "C. Puerto Rican", response: "So I'm reporting you to the IRS for Insider Trading and Tax Evasion" },
-            { text: "D. Bruh... you better not answer C", response: "So I'm reporting you to the IRS for Insider Trading and Tax Evasion" }
+            { text: "A. A sun-drenched beach in Costa Rica", correct: true, response: "Back to my homeland 🥰" },
+            { text: "B. A lush botanical garden surrounded by flowers", correct: true, response: "Accepted! Only if you promise not to sneeze down the aisle 🌸" },
+            { text: "C. A cozy, twinkling-light backyard wedding", correct: true, response: "Immaculate vibes. Saving half the budget for the honeymoon 🕯️" },
+            { text: "D. A court house in full casual clothes", correct: false, response: "So I'm reporting you to the IRS for Insider Trading and Tax Evasion 🚨" }
         ]
     },
     {
         question: "9. Whose are you?",
         answers: [
-            { text: "A. Yours", response: "Fiiinnneee... I guess I'll be your Valentine 💌" },
-            { text: "B. Daniel's", response: "Fiiinnneee... I guess I'll be your Valentine 💌" },
-            { text: "C. Daddy's", response: "Fiiinnneee... I guess I'll be your Valentine 💌" },
-            { text: "D. My baby's", response: "Fiiinnneee... I guess I'll be your Valentine 💌" }
+            { text: "A. Yours", correct: true, response: "Fiiinnneee... I guess I'll go out with you 💌" },
+            { text: "B. Daniel's", correct: true, response: "Fiiinnneee... I guess I'll go out with you 💌" },
+            { text: "C. Kora's father's", correct: true, response: "Fiiinnneee... I guess I'll go out with you 💌" },
+            { text: "D. My baby's", correct: true, response: "Fiiinnneee... I guess I'll go out with you 💌" }
         ],
         hasEasterEgg: true
     }
@@ -93,17 +105,32 @@ function initPart1() {
         initQuiz();
     });
 
+    // alternating hemisphere flag for evasion
+    state.part1NextLeft = true;
+
     noBtn.addEventListener('mouseover', (e) => {
+        // stop evading after 20 attempts
+        if (state.part1Attempts >= 20) return;
+
         state.part1Attempts++;
         updateAttemptsDisplay();
-        evadeButton(noBtn, e);
-        
+
+        // move to alternating hemisphere
+        alternateHemisphereEvade(noBtn, 'part1NextLeft');
+
         if (state.part1Attempts % 5 === 0) {
+            // Play escalation audio/images at 5,10,15,20
             showEscalationImage(state.part1Attempts);
         }
 
+        // after 20 attempts, allow click to proceed to Q2
         if (state.part1Attempts === 20) {
-            handleEscalationQ2();
+            const finalize = () => {
+                showSection('escalation-q2');
+                initEscalationQ2();
+                noBtn.removeEventListener('click', finalize);
+            };
+            noBtn.addEventListener('click', finalize);
         }
     });
 }
@@ -137,6 +164,43 @@ function evadeButton(btn, event) {
     btn.style.top = new_y + 'px';
 }
 
+// New evasion: alternate between left and right hemispheres
+function alternateHemisphereEvade(btn, stateFlagKey) {
+    const padding = 20;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const midX = vw / 2;
+
+    let minX, maxX;
+    if (state[stateFlagKey]) {
+        // left hemisphere
+        minX = padding;
+        maxX = Math.max(padding, midX - btn.offsetWidth - padding);
+    } else {
+        // right hemisphere
+        minX = Math.min(vw - btn.offsetWidth - padding, midX + padding);
+        maxX = vw - btn.offsetWidth - padding;
+    }
+
+    const minY = padding;
+    const maxY = vh - btn.offsetHeight - padding;
+
+    const new_x = (maxX > minX) ? (Math.random() * (maxX - minX) + minX) : minX;
+    const new_y = (maxY > minY) ? (Math.random() * (maxY - minY) + minY) : minY;
+
+    if (!btn.classList.contains('evading')) {
+        btn.style.position = 'fixed';
+        btn.classList.add('evading');
+        btn.style.zIndex = '9999';
+    }
+
+    btn.style.left = `${Math.round(new_x)}px`;
+    btn.style.top = `${Math.round(new_y)}px`;
+
+    // toggle hemisphere for next move
+    state[stateFlagKey] = !state[stateFlagKey];
+}
+
 function updateAttemptsDisplay() {
     const display = document.getElementById('attempts-display');
     display.textContent = `Attempts: ${state.part1Attempts}`;
@@ -146,39 +210,38 @@ function showEscalationImage(attemptCount) {
     const imageDiv = document.getElementById('escalation-image');
     const imageNum = (attemptCount / 5);
     const imagePath = `assets/images/escalation_${imageNum}.png`;
-    
+
     imageDiv.innerHTML = `<img src="${imagePath}" alt="Escalation image ${imageNum}">`;
-    
-    // Always play audio after displaying image
+
+    preloadEscalationAudio(imageNum);
     playEscalationAudio(imageNum);
 }
 
-function playEscalationAudio(audioNum) {
-    try {
-        const audioPath = `assets/audio/escalation_${audioNum}.mp3`;
+function preloadEscalationAudio(audioNum) {
+    const audioPath = `assets/audio/escalation_${audioNum}.mp3`;
+    if (!escalationAudioCache[audioNum]) {
         const audio = new Audio(audioPath);
-        audio.volume = 0.7;
-        
-        // Attempt to play immediately
-        const playPromise = audio.play();
-        
-        if (playPromise !== undefined) {
-            playPromise
-                .then(() => {
-                    // Autoplay succeeded
-                })
-                .catch(error => {
-                    // Autoplay was likely prevented, try muted approach
-                    console.warn('Autoplay blocked, attempting with user consent');
-                    audio.muted = false;
-                    audio.play().catch(err => {
-                        console.warn('Audio failed to play:', err);
-                    });
-                });
-        }
-    } catch (error) {
-        console.warn('Audio playback error:', error);
+        audio.preload = 'auto';
+        audio.volume = 0.8;
+        audio.muted = true;
+        audio.play().catch(() => {
+            // muted playback may still fail in some environments, but keep the object cached
+        });
+        escalationAudioCache[audioNum] = audio;
     }
+}
+
+function playEscalationAudio(audioNum) {
+    let audio = escalationAudioCache[audioNum];
+    if (!audio) {
+        preloadEscalationAudio(audioNum);
+        audio = escalationAudioCache[audioNum];
+    }
+    audio.muted = false;
+    audio.currentTime = 0;
+    audio.play().catch(err => {
+        console.warn('Escalation audio play failed:', err);
+    });
 }
 
 function handleEscalationQ2() {
@@ -191,26 +254,36 @@ function handleEscalationQ2() {
 // ========================================
 
 function initEscalationQ2() {
-    const yesBtn = document.getElementById('q2YesBtn');
-    const noBtn = document.getElementById('q2NoBtn');
+    const noBtn = document.getElementById('q2YesBtn');
+    const yesBtn = document.getElementById('q2NoBtn');
 
-    yesBtn.addEventListener('click', () => {
-        showSection('escalation-q3');
-        initEscalationQ3();
+    // Quick No route: clicking No sends user to the quiz immediately
+    noBtn.addEventListener('click', () => {
+        showSection('quiz-section');
+        initQuiz();
     });
 
-    noBtn.addEventListener('mouseover', (e) => {
+    // The Yes button is evasive in this screen (matches part1 No behavior)
+    state.part2NextLeft = true;
+    yesBtn.addEventListener('mouseover', (e) => {
+        if (state.part2Attempts >= 20) return;
+
         state.part2Attempts++;
         updateQ2AttemptsDisplay();
-        evadeButton(noBtn, e);
+        alternateHemisphereEvade(yesBtn, 'part2NextLeft');
 
         if (state.part2Attempts % 5 === 0) {
             showQ2EscalationImage(state.part2Attempts);
         }
 
         if (state.part2Attempts === 20) {
-            showSection('escalation-q3');
-            initEscalationQ3();
+            // allow click to proceed to Q3 after 20 evasion attempts
+            const finalize = () => {
+                showSection('escalation-q3');
+                initEscalationQ3();
+                yesBtn.removeEventListener('click', finalize);
+            };
+            yesBtn.addEventListener('click', finalize);
         }
     });
 }
@@ -224,11 +297,13 @@ function showQ2EscalationImage(attemptCount) {
     const imageDiv = document.getElementById('q2-escalation-image');
     const imageNum = (attemptCount / 5) + 4; // Continuing from image 5+
     const imagePath = `assets/images/escalation_${imageNum}.png`;
-    
+
     imageDiv.innerHTML = `<img src="${imagePath}" alt="Escalation image ${imageNum}">`;
-    
-    // Play audio with the image
-    playEscalationAudio(imageNum);
+
+    // Preload and play the matching audio cue at 5/10/15/20 on screen 2
+    const audioIndex = attemptCount / 5; // 1..4
+    preloadEscalationAudio(audioIndex);
+    playEscalationAudio(audioIndex);
 }
 
 // ========================================
@@ -239,16 +314,24 @@ function initEscalationQ3() {
     const yesBtn = document.getElementById('q3YesBtn');
     const noBtn = document.getElementById('q3NoBtn');
 
-    const handleClick = () => {
-        showCatLaughingImage();
-        setTimeout(() => {
+    // Remove any previously added next button
+    const existing = document.getElementById('q3-next-btn');
+    if (existing) existing.remove();
+
+    // Optionally show a little image, then reveal Next button after a short delay
+    setTimeout(() => {
+        const container = document.querySelector('#escalation-q3 .first_date-container');
+        const next = document.createElement('button');
+        next.id = 'q3-next-btn';
+        next.className = 'btn btn-next';
+        next.textContent = 'Next Question →';
+        next.style.marginTop = '18px';
+        next.addEventListener('click', () => {
             showSection('quiz-section');
             initQuiz();
-        }, 2000);
-    };
-
-    yesBtn.addEventListener('click', handleClick);
-    noBtn.addEventListener('click', handleClick);
+        });
+        container.appendChild(next);
+    }, 1200);
 }
 
 function showCatLaughingImage() {
@@ -346,15 +429,8 @@ function showQuestion(questionNum) {
             btn.addEventListener('click', () => {
                 if (answer.correct) {
                     showResponse(answer.response);
-                    setTimeout(() => {
-                        state.currentQuestion++;
-                        showQuestion(state.currentQuestion);
-                    }, 2000);
                 } else {
-                    showResponse("Try Again");
-                    setTimeout(() => {
-                        showQuestion(questionNum);
-                    }, 1500);
+                    showResponse("Try Again", {advance: false});
                 }
             });
         }
@@ -364,9 +440,6 @@ function showQuestion(questionNum) {
             if (index !== 1) {
                 btn.addEventListener('click', () => {
                     showResponse("Fiiinnneee... I guess I'll be your Valentine 💌");
-                    setTimeout(() => {
-                        showFinalSection();
-                    }, 2000);
                 });
             }
         }
@@ -374,10 +447,6 @@ function showQuestion(questionNum) {
         else {
             btn.addEventListener('click', () => {
                 showResponse(answer.response || answer.text);
-                setTimeout(() => {
-                    state.currentQuestion++;
-                    showQuestion(state.currentQuestion);
-                }, 2000);
             });
         }
         
@@ -427,7 +496,7 @@ function addQ1HoverHint(questionDisplay) {
                         state.currentQuestion = 2;
                         showQuestion(2);
                     };
-                }, 2000);
+                }, 1000);
             });
         }
     });
@@ -477,9 +546,6 @@ function addQ9EasterEgg(questionDisplay) {
         } else {
             // Normal response
             showResponse("Fiiinnneee... I guess I'll be your Valentine 💌");
-            setTimeout(() => {
-                showFinalSection();
-            }, 2000);
         }
     });
     
@@ -534,7 +600,7 @@ function showHint(hintText) {
     }
 }
 
-function showResponse(responseText, index = null) {
+function showResponse(responseText, options = {}) {
     const responseDisplay = document.getElementById('response-display');
     const questionDisplay = document.getElementById('question-display');
     const responseTextElement = document.getElementById('response-text');
@@ -548,20 +614,26 @@ function showResponse(responseText, index = null) {
     
     const nextBtn = document.getElementById('next-question-btn');
     nextBtn.classList.add('hidden');
-    
+    const advance = options.advance !== undefined ? options.advance : true;
+
     setTimeout(() => {
         nextBtn.classList.remove('hidden');
         nextBtn.onclick = () => {
             questionDisplay.classList.remove('hidden');
             responseDisplay.classList.add('hidden');
-            if (state.currentQuestion < quizData.length) {
-                state.currentQuestion++;
-                showQuestion(state.currentQuestion);
+            if (advance) {
+                if (state.currentQuestion < quizData.length) {
+                    state.currentQuestion++;
+                    showQuestion(state.currentQuestion);
+                } else {
+                    showFinalSection();
+                }
             } else {
-                showFinalSection();
+                // stay on same question for retry
+                showQuestion(state.currentQuestion);
             }
         };
-    }, 2000);
+    }, 1000);
 }
 
 function showFinalSection() {
