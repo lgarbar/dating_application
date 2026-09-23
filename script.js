@@ -18,83 +18,79 @@ let escalationAudioUnlocked = false;
 // Quiz Data
 const quizData = [
     {
-        question: "1. What is my cat's name?",
+        question: "1. How do you feel about cats?",
         answers: [
-            { text: "A. Korra", correct: false },
-            { text: "B. Feline General Koraline", correct: false },
-            { text: "C. Meowkora", correct: false },
-            { text: "D. Kora Bora", correct: false }
-        ],
-        response: "Wow, so you hate your future daughter? 💔",
-        hint: "Try hovering over here",
-        correctAnswer: "Feline General Meowkora"
-    },
-    {
-        question: "2. What is my ideal ideal date night activity?",
-        answers: [
-            { text: "A. Cooking a fancy meal from scratch together", correct: true, response: "And then bake a sweet treat together 🧁" },
-            { text: "B. Late-night drive with no destination and a good playlist", correct: true, response: "Correct, but you better add at least 1 PATD! song 🚗🎶" },
-            { text: "C. Going to a loud club to dance all night", correct: false, response: "Oh.. HELL NAH" },
-            { text: "D. Building a blanket fort and watching movies until we pass out", correct: true, response: "Elite tier. You get VIP access to the fort 🏰✨" }
+            { text: "A. I love cats", correct: true, response: "Perfect. A real cat person. 🐾", subtitle: "Correct — you clearly understand my heart." },
+            { text: "B. I hate cats", correct: false, response: "Oof. That one stings a little. 😬", subtitle: "Not quite — I think we need a cat introduction stat." },
+            { text: "C. I've never really spent time with a cat", correct: true, response: "That just means the door is open for a new obsession. 🐈", subtitle: "Correct — you’re still a blank slate, and I’m very willing to fix that." },
+            { text: "D. I'll love your cat, ofc", correct: true, response: "Now that’s the right answer. ❤️", subtitle: "Correct — I like a woman who knows how to appreciate the important things." }
         ]
     },
     {
-        question: "3. What's my favorite thing to eat?",
+        question: "2. What is my cat's name? (Hint: take a look at my profile)",
         answers: [
-            { text: "A. Sky's Vanilla Chai Cinnamon Snickerdoodles", correct: true, response: "They will be, I'm sure :))" },
-            { text: "B. Quesadillas", correct: true, response: "Ofc. It's just a better sandwich 😌" },
-            { text: "C. Sky's other cookie 👀", correct: true, response: "Maybe you'll see at some point just how true this is..." },
-            { text: "D. Kora", correct: false, response: "Nah... but I do threaten to eat her probably once a week." }
+            { text: "A. Boots", correct: false, response: "Not quite. Cute name, wrong cat. 🐾", subtitle: "Incorrect — the answer is more dramatic than that." },
+            { text: "B. Feline General Meowkora", correct: true, response: "Exactly. The queen has spoken. 👑", subtitle: "Correct — so you were paying attention." },
+            { text: "C. Mittens", correct: false, response: "Cute, but not the right royal title. 😌", subtitle: "Incorrect — this is a very serious feline monarchy." },
+            { text: "D. Kora", correct: true, response: "Kora is a strong contender, but the full title is the real answer. ✨", subtitle: "Correct — close enough to know the family vibe." }
         ]
     },
     {
-        question: "4. What's the best painting medium?",
+        question: "3. What is my ideal date night activity?",
         answers: [
-            { text: "A. Oil Pastels", correct: false, response: "HELL NO."},
-            { text: "B. Acrylic", correct: false , response: "Nah... but not terrible"},
-            { text: "C. Watercolor", correct: true, response: "a reasonable answer..."},
-            { text: "D. Digital", correct: true, response: "The only correct answer."}
+            { text: "A. Cooking a fancy meal from scratch together", correct: true, response: "That is actually peak romance. 🍽️", subtitle: "Correct — luxurious and cozy, exactly my kind of night." },
+            { text: "B. Late-night drive with no destination and a good playlist", correct: true, response: "A perfect little adventure. 🚗🎶", subtitle: "Correct — spontaneous and a little cinematic." },
+            { text: "C. Going to a loud club to dance all night", correct: false, response: "Oh no. I’d rather be cuddling than shouting over bass. 🎶", subtitle: "Incorrect — not my vibe, and honestly, I’m relieved." },
+            { text: "D. Building a blanket fort and watching movies until we pass out", correct: true, response: "Elite tier. You get VIP access to the fort. 🏰✨", subtitle: "Correct — this is the sweetest kind of chaos." }
         ]
     },
     {
-        question: "5. Who's the prettiest girl in the world?",
+        question: "4. Who's the prettiest girl in the world?",
         answers: [
-            { text: "A. Kora", correct: true, response: "Queen Kora 👑"},
-            { text: "B. Chai", correct: true , response: "Cool and serene, like a mornign tea"},
-            { text: "C. Poppie", correct: true, response: "Sweetheart like a PopTart"},
-            { text: "D. Sky", correct: true, response: "Your eyes glow bright, a sun within the Sky, A beauty I hope to wake to every day. Hold close to me as endless years go by, And let your gentle heart be mine to stay"}
+            { text: "A. Kora", correct: false, response: "She is gorgeous, but not the full answer. 😅", subtitle: "Incorrect — but a very fair guess." },
+            { text: "B. Emme", correct: false, response: "Also a strong choice, but not the full picture. 💖", subtitle: "Incorrect — I love that you have taste." },
+            { text: "C. Emme & Kora", correct: true, response: "Now that is the correct answer. 👑", subtitle: "Correct — you know what matters." },
+            { text: "D. All of the Above", correct: true, response: "Exactly. You get it. ✨", subtitle: "Correct — the beauty is undeniable." }
+        ]
+    },
+    {
+        question: "5. Who will you be?",
+        answers: [
+            { text: "A. Yours", correct: true, response: "Aww. I like that answer. 💌", subtitle: "Correct — this one is very sweet." },
+            { text: "B. Daniel's", correct: true, response: "I like that answer too, for very obvious reasons. 😘", subtitle: "Correct — you’re clearly keeping good company." },
+            { text: "C. Kora's father's", correct: true, response: "My goodness. You are being unhinged in the best way. 🤣", subtitle: "Correct — and somehow, still the most accurate answer." },
+            { text: "D. My baby", correct: true, response: "That’s the answer I wanted. 🫶", subtitle: "Correct — you just said the quiet part out loud." }
         ]
     },
     {
         question: "6-7. Watch this meme edit...",
         isVideo: true,
         videoFile: "assets/videos/6-7_meme_edit.mp4",
-        response: "That's hilarious 😂"
+        response: "Please watch the following...",
     },
     {
-        question: "8. Pick the best venue for our wedding to be:",
+        question: "8. What will our karaoke song be?",
         answers: [
-            { text: "A. A sun-drenched beach in Costa Rica", correct: true, response: "Back to my homeland 🥰" },
-            { text: "B. A lush botanical garden surrounded by flowers", correct: true, response: "Accepted! Only if you promise not to sneeze down the aisle 🌸" },
-            { text: "C. A cozy, twinkling-light backyard wedding", correct: true, response: "Immaculate vibes. Saving half the budget for the honeymoon 🕯️" },
-            { text: "D. A court house in full casual clothes", correct: false, response: "So I'm reporting you to the IRS for Insider Trading and Tax Evasion 🚨" }
+            { text: "A. A Whole New World (Aladdin)", correct: true, response: "Classic. We are definitely doing this together. ✨", subtitle: "Correct — perfect little duet energy." },
+            { text: "B. Firework (Katy Perry)", correct: true, response: "Absolutely. We’re about to be dramatic and loud. 🎤", subtitle: "Correct — very on-brand and very me." },
+            { text: "C. Shallow (Lady Gaga)", correct: true, response: "You know exactly what kind of chemistry I’m talking about. 🎶", subtitle: "Correct — a little intense and a lot iconic." },
+            { text: "D. Stay (Rihanna)", correct: true, response: "This one is spicy. I respect it. 🔥", subtitle: "Correct — you know the mood is serious." }
         ]
-    },
-    {
-        question: "9. Whose are you?",
-        answers: [
-            { text: "A. Yours", correct: true, response: "Fiiinnneee... I guess I'll go out with you 💌" },
-            { text: "B. Daniel's", correct: true, response: "Fiiinnneee... I guess I'll go out with you 💌" },
-            { text: "C. Kora's father's", correct: true, response: "Fiiinnneee... I guess I'll go out with you 💌" },
-            { text: "D. My baby's", correct: true, response: "Fiiinnneee... I guess I'll go out with you 💌" }
-        ],
-        hasEasterEgg: true
     }
 ];
 
 // ========================================
 // PART 1: VALENTINE'S QUESTION
 // ========================================
+
+function initIntroProfile() {
+    const introBtn = document.getElementById('intro-interest-btn');
+    if (introBtn) {
+        introBtn.addEventListener('click', () => {
+            showSection('part1');
+        });
+    }
+}
 
 function initPart1() {
     const yesBtn = document.getElementById('yesBtn');
@@ -357,9 +353,7 @@ function showQuestion(questionNum) {
     
     const question = quizData[questionNum - 1];
     
-    // Handle special video question (6-7)
     if (question.isVideo) {
-        // Clear any previous question structure first
         questionDisplay.innerHTML = `
             <h2>${question.question}</h2>
             <video controls style="max-width: 100%; margin: 30px 0; border-radius: 20px;">
@@ -370,7 +364,10 @@ function showQuestion(questionNum) {
         
         const responseDisplay = document.getElementById('response-display');
         responseDisplay.classList.remove('hidden');
-        document.getElementById('response-text').textContent = '';
+        document.getElementById('response-text').innerHTML = `
+            <span class="response-label response-correct">Correct</span>
+            <span class="response-message">${question.response}</span>
+        `;
         document.getElementById('response-media').innerHTML = '';
         
         const nextBtn = document.getElementById('next-question-btn');
@@ -379,7 +376,6 @@ function showQuestion(questionNum) {
         setTimeout(() => {
             nextBtn.classList.remove('hidden');
             nextBtn.onclick = () => {
-                // IMPORTANT: Clear the video and restore structure for next question
                 questionDisplay.innerHTML = `<h2></h2><div id="answers-container" class="answers-container"></div>`;
                 responseDisplay.classList.add('hidden');
                 state.currentQuestion++;
@@ -389,8 +385,6 @@ function showQuestion(questionNum) {
         return;
     }
 
-    // Regular question
-    // Make sure the structure is preserved
     if (!questionDisplay.querySelector('h2')) {
         questionDisplay.innerHTML = `<h2></h2><div id="answers-container" class="answers-container"></div>`;
     }
@@ -399,69 +393,19 @@ function showQuestion(questionNum) {
     const answersContainer = document.getElementById('answers-container');
     answersContainer.innerHTML = '';
 
-    question.answers.forEach((answer, index) => {
+    question.answers.forEach((answer) => {
         const btn = document.createElement('button');
         btn.className = 'answer-btn full-width';
         btn.textContent = answer.text;
-        
-        // Question 1 special logic
-        if (questionNum === 1) {
-            btn.addEventListener('click', () => {
-                if (!state.q1Answered) {
-                    // Show the wrong answer response BUT keep questions visible
-                    const responseDisplay = document.getElementById('response-display');
-                    const responseTextElement = document.getElementById('response-text');
-                    const responseMedia = document.getElementById('response-media');
-                    
-                    responseTextElement.textContent = question.response;
-                    responseMedia.innerHTML = '';
-                    responseDisplay.classList.remove('hidden');
-                    
-                    // After showing wrong answer, set up hover hint
-                    setTimeout(() => {
-                        showHint(question.hint);
-                    }, 5000);
-                }
+
+        btn.addEventListener('click', () => {
+            showResponse(answer.response || answer.text, {
+                isCorrect: Boolean(answer.correct)
             });
-        }
-        // Question 4-5 special logic
-        else if (questionNum === 4) {
-            btn.addEventListener('click', () => {
-                if (answer.correct) {
-                    showResponse(answer.response);
-                } else {
-                    showResponse("Try Again", {advance: false});
-                }
-            });
-        }
-        // Question 9 special logic
-        else if (questionNum === 9) {
-            // For button B (index 1), skip - it's handled exclusively by addQ9EasterEgg()
-            if (index !== 1) {
-                btn.addEventListener('click', () => {
-                    showResponse("Fiiinnneee... I guess I'll be your Valentine 💌");
-                });
-            }
-        }
-        // Regular questions
-        else {
-            btn.addEventListener('click', () => {
-                showResponse(answer.response || answer.text);
-            });
-        }
+        });
         
         answersContainer.appendChild(btn);
     });
-
-    // Question 1 special: hover hint for bottom right
-    if (questionNum === 1 && !state.q1Answered) {
-        addQ1HoverHint(questionDisplay);
-    }
-
-    // Question 9 special: easter egg hover
-    if (questionNum === 9) {
-        addQ9EasterEgg(questionDisplay);
-    }
 }
 
 function addQ1HoverHint(questionDisplay) {
@@ -609,7 +553,14 @@ function showResponse(responseText, options = {}) {
     questionDisplay.classList.add('hidden');
     responseDisplay.classList.remove('hidden');
     
-    responseTextElement.textContent = responseText;
+    const isCorrect = options.isCorrect === true;
+    const labelText = isCorrect ? 'Correct' : 'Incorrect';
+    const labelClass = isCorrect ? 'response-correct' : 'response-incorrect';
+
+    responseTextElement.innerHTML = `
+        <span class="response-label ${labelClass}">${labelText}</span>
+        <span class="response-message">${responseText}</span>
+    `;
     responseMedia.innerHTML = '';
     
     const nextBtn = document.getElementById('next-question-btn');
@@ -629,7 +580,6 @@ function showResponse(responseText, options = {}) {
                     showFinalSection();
                 }
             } else {
-                // stay on same question for retry
                 showQuestion(state.currentQuestion);
             }
         };
@@ -638,6 +588,48 @@ function showResponse(responseText, options = {}) {
 
 function showFinalSection() {
     showSection('final-section');
+}
+
+function initDateFlow() {
+    const finalNextBtn = document.getElementById('final-next-btn');
+    const dateOptionsNext = document.getElementById('date-options-next');
+    const dateSchedulingNext = document.getElementById('date-scheduling-next');
+    const confirmationImage = document.getElementById('confirmation-image');
+
+    if (finalNextBtn) {
+        finalNextBtn.addEventListener('click', () => {
+            showSection('date-options-section');
+        });
+    }
+
+    if (dateOptionsNext) {
+        dateOptionsNext.addEventListener('click', () => {
+            const dateChoice = document.getElementById('date-choice');
+            if (dateChoice) {
+                dateChoice.setAttribute('aria-label', dateChoice.value);
+            }
+            showSection('date-scheduling-section');
+        });
+    }
+
+    if (dateSchedulingNext) {
+        dateSchedulingNext.addEventListener('click', () => {
+            const dateInput = document.getElementById('date-input');
+            const timeInput = document.getElementById('time-input');
+            const selectedDate = dateInput && dateInput.value ? dateInput.value : 'a date soon';
+            const selectedTime = timeInput && timeInput.value ? timeInput.value : 'at a sweet time';
+
+            if (confirmationImage) {
+                confirmationImage.innerHTML = `
+                    <div class="date-summary-card">
+                        <p><strong>Plan:</strong> ${document.getElementById('date-choice')?.value || 'A cute date'}</p>
+                        <p><strong>When:</strong> ${selectedDate} at ${selectedTime}</p>
+                    </div>
+                `;
+            }
+            showSection('date-confirmation-section');
+        });
+    }
 }
 
 // ========================================
@@ -660,5 +652,7 @@ function showSection(sectionId) {
 // ========================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    initIntroProfile();
     initPart1();
+    initDateFlow();
 });

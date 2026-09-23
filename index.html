@@ -7,8 +7,47 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Intro Profile Section -->
+    <div id="intro-profile" class="section">
+        <div class="profile-container">
+            <h1 class="fade-in">Are you interested?</h1>
+
+            <div class="profile-card">
+                <div class="profile-photo-wrap">
+                    <img src="assets/images/IMH_9128.png" alt="Dating profile headshot" class="profile-photo">
+                </div>
+
+                <div class="profile-details">
+                    <div class="profile-stats">
+                        <span>Height: 5'11</span>
+                        <span>Weight: 190lbs</span>
+                        <span>Age: 26 yrs</span>
+                    </div>
+
+                    <div class="profile-role">
+                        <h2>PhD student studying Cognitive Neuroscience</h2>
+                        <p class="profile-subtitle">I study the brain for a living, so you can bet I give good head</p>
+                    </div>
+
+                    <div class="green-flags">
+                        <h3>Green flags</h3>
+                        <ul>
+                            <li>Has 2 sisters (older and younger)</li>
+                            <li>Never leaves the toilet seat up</li>
+                            <li>Can dress myself (was voted best-dressed in high school)</li>
+                            <li>Never mansplains</li>
+                            <li>Don't really have social media (you'll be the only girl I'll be looking at)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <button id="intro-interest-btn" class="btn btn-yes profile-btn">I am interested!</button>
+        </div>
+    </div>
+
     <!-- Part 1: First Date Question Section -->
-    <div id="part1" class="section">
+    <div id="part1" class="section hidden">
         <div class="first_date-container">
             <h1 class="fade-in">Will you go on a date with me? 💕</h1>
             <h2 class="fade-in">Click on option below:</h2>
@@ -51,7 +90,7 @@
     <!-- Quiz Section -->
     <div id="quiz-section" class="section hidden">
         <div class="quiz-container">
-            <h1 class="quiz-title fade-in">If you want the honor of going out with me, then answer my questions 1 to 9:</h1>
+            <h1 class="quiz-title fade-in">If you want the honor of going out with me, then answer my questions 1 to 7:</h1>
             
             <!-- Question Display -->
             <div id="question-display" class="question-display">
@@ -74,6 +113,58 @@
             <h1 class="fade-in">You Made It! 🎉💌</h1>
             <p class="final-message">I guess I'll go out with you...</p>
             <div id="final-image"></div>
+            <button id="final-next-btn" class="btn btn-next">Plan Our Date ✨</button>
+        </div>
+    </div>
+
+    <!-- Date Ideas Section -->
+    <div id="date-options-section" class="section hidden">
+        <div class="quiz-container date-planning-container">
+            <h1 class="quiz-title fade-in">Pick the kind of date I should plan for us 💕</h1>
+
+            <div class="date-picker-wrap">
+                <label for="date-choice" class="input-label">Date idea</label>
+                <select id="date-choice" class="date-select">
+                    <option value="Museum date">Museum date</option>
+                    <option value="Sweet treat date">Sweet treat date</option>
+                    <option value="Escape room">Escape room</option>
+                    <option value="Water gun battle royale">Water gun battle royale</option>
+                    <option value="Teaching me how to backflip">Teaching me how to backflip</option>
+                    <option value="Cat cafe">Cat cafe</option>
+                </select>
+            </div>
+
+            <button id="date-options-next" class="btn btn-next">Pick a day and time →</button>
+        </div>
+    </div>
+
+    <!-- Date Scheduling Section -->
+    <div id="date-scheduling-section" class="section hidden">
+        <div class="quiz-container date-planning-container">
+            <h1 class="quiz-title fade-in">When are we doing this? 📅</h1>
+
+            <div class="date-inputs">
+                <div class="date-picker-wrap">
+                    <label for="date-input" class="input-label">Date</label>
+                    <input id="date-input" class="date-input" type="date">
+                </div>
+
+                <div class="date-picker-wrap">
+                    <label for="time-input" class="input-label">Time</label>
+                    <input id="time-input" class="date-input" type="time">
+                </div>
+            </div>
+
+            <button id="date-scheduling-next" class="btn btn-next">Lock it in 💌</button>
+        </div>
+    </div>
+
+    <!-- Date Confirmation Section -->
+    <div id="date-confirmation-section" class="section hidden">
+        <div class="first_date-container">
+            <h1 class="fade-in">Great, can't wait to take you out, Pretty eyes 💖</h1>
+            <p class="final-message">This is going to be a very cute little adventure with you.</p>
+            <div id="confirmation-image" class="confirmation-image"></div>
         </div>
     </div>
 
